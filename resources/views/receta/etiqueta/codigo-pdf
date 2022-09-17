@@ -1,0 +1,7 @@
+Route::get("test", function (Request $request) {
+    $dompdf = App::make("dompdf.wrapper");
+    $dompdf->loadView("ejemplo", [
+        "nombre" => "Luis Cabrera Benito",
+    ]);
+    return $dompdf->stream();
+});
