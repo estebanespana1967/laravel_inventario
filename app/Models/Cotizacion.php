@@ -17,7 +17,6 @@ class Cotizacion extends Model
         'materia_prima_id',
         'cantidad_materia_prima',
         'costo_materia_prima',
-                
     ];    
     // relacion  de 1 a 1
     public function materia_prima_cotizacion() {

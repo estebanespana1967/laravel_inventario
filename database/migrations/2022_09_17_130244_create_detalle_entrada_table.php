@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('detalle_entrada', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_encabezado_entrada');
-            $table->unsignedBigInteger('id_empresa');
             $table->unsignedBigInteger('id_materia_prima');
             $table->string('cantidad_materia_prima');
             $table->string('unidad_medida');
