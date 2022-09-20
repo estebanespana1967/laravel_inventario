@@ -38,4 +38,13 @@ public function encabezado_salida()
 {
     return $this->hasMany(Encabezado_salida::class);
 }
+  //Funciones de búsqueda, Query Scope
+  public function scopeNombre($query, $nombre){
+    if($nombre)
+        return $query->where('nombre_empresa','LIKE',"%$nombre%");
+}
+public function scopeRut($query, $nombre){
+    if($nombre)
+        return $query->where('rut_empresa','LIKE',"%$nombre%");
+}
 }

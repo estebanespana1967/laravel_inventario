@@ -278,7 +278,6 @@ return [
             'text'        => 'RECETA',
             'url'         => '/receta',
             'icon'        => 'fas fa-fw fa-prescription',
-            
             //'label'       => 4,
             'label_color' => 'success',
         ],
@@ -321,9 +320,53 @@ return [
             ],
         ],
         [
-            'text'        => 'REPORTES INTERNOS',
-            'url'         => '/reportes_internos',
-            'icon'        => 'fa-solid fa-chart-line',
+            'text'    => 'Reportes Internos',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Por Medico',
+                    'url'  => '/reportes_internos',
+                ],
+                [
+                    'text' => 'Por Pacientes',
+                    'url'  => '/reportes_internos2',
+                ],
+                [
+                    'text' => 'Por Materia Prima',
+                    'url'  => '/reportes_internos3',
+                ],
+                [
+                    'text' => 'Por Receta',
+                    'url'  => '/reportes_internos4',
+                ],
+            ],
+        ],
+        [
+            'text'    => 'INVENTARIO',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text' => 'Entradas',
+                    'url'  => '/entradaencabezado',
+                ],
+                [
+                    'text' => 'Salidas',
+                    'url'  => '/inventario/salidas',
+                ],
+                [
+                    'text' => 'Movimientos',
+                    'url'  => '/inventario/movimientos',
+                ],
+                [
+                    'text' => 'Historial Precios',
+                    'url'  => '/inventario/historial_precios',
+                ],
+            ],
+        ],
+        [
+            'text'        => 'EMPRESAS',
+            'url'         => '/empresas',
+            'icon'        => 'fa fa-fw fa-industry',
             //'label'       => 4,
             'label_color' => 'success',
         ],

@@ -11,6 +11,9 @@ use App\Http\Controllers\OrdenTrabajoController;
 use App\Http\Controllers\OrdenEntregaController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\EntradaController;
+use App\Http\Controllers\DetalleEntradaController;
 
 
 use App\Http\Livewire\Productos;
@@ -153,6 +156,26 @@ Route::get('/reportesLc/index2',[ReporteController::class, 'reportesLc_ver'])->n
 Route::get('/reportes_internos',[ReporteController::class, 'reportes_internos'])->name('reportes_internos.index');
 Route::get('/reportesMp/{cotizacion_id}',[ReporteController::class, 'solicitarposicion'])->name('reportesMp.solicitarposicion');
 Route::get('/reportesimprimir/{cotizacion_id}',[ReporteController::class, 'imprimiretiqueta'])->name('reporte.imprimiretiqueta');
+
+
+Route::get('/empresas',[EmpresaController::class,'index'])->name('empresas.index');
+Route::get('/empresas/crear',[EmpresaController::class,'create'])->name('empresas.create');
+Route::post('/empresas/guardar',[EmpresaController::class,'store'])->name('empresas.store');
+Route::get('/empresas/editar/{id}',[EmpresaController::class,'edit'])->name('empresas.edit');
+Route::put('/empresas/actualizar/{id}', [EmpresaController::class, 'update'])->name('empresas.update');
+Route::delete('/empresas/eliminar/{id}', [EmpresaController::class, 'destroy'])->name('empresas.destroy');
+
+Route::get('/entradaencabezado',[EntradaController::class,'index'])->name('entrada.encabezado.index');
+Route::get('/entradaencabezado/crear',[EntradaController::class,'create'])->name('entrada.encabezado.create');
+Route::post('/entradaencabezado/guardar',[EntradaController::class,'store'])->name('entrada.encabezado.store');
+Route::get('/entradaencabezado/editar/{id}',[EntradaController::class,'edit'])->name('entrada.encabezado.edit');
+Route::put('/entradaencabezado/actualizar/{id}', [EntradaController::class, 'update'])->name('entrada.encabezado.update');
+Route::delete('/entradaencabezado/eliminar/{id}', [EntradaController::class, 'destroy'])->name('entrada.encabezado.destroy');
+Route::get('/entradadetalle/{id}',[DetalleEntradaController::class,'index'])->name('entrada.detalle.index');
+
+
+
+
 
 Route::get('/test/', function () {
     $pdf = PDF::loadView('pruebaparapdf');

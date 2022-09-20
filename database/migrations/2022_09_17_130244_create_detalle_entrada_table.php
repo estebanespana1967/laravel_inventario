@@ -28,10 +28,6 @@ return new class extends Migration
             ->references('id')
             ->on('encabezado_entrada')
             ->onDelete('cascade');
-            $table->foreign('id_empresa')
-            ->references('id')
-            ->on('empresas')
-            ->onDelete('cascade');
             $table->foreign('id_materia_prima')
             ->references('id')
             ->on('materia_prima')
