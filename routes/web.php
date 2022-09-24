@@ -171,8 +171,13 @@ Route::post('/entradaencabezado/guardar',[EntradaController::class,'store'])->na
 Route::get('/entradaencabezado/editar/{id}',[EntradaController::class,'edit'])->name('entrada.encabezado.edit');
 Route::put('/entradaencabezado/actualizar/{id}', [EntradaController::class, 'update'])->name('entrada.encabezado.update');
 Route::delete('/entradaencabezado/eliminar/{id}', [EntradaController::class, 'destroy'])->name('entrada.encabezado.destroy');
-Route::get('/entradadetalle/{id}',[DetalleEntradaController::class,'index'])->name('entrada.detalle.index');
 
+Route::get('/entradadetalle/{id}',[DetalleEntradaController::class,'index'])->name('entrada.detalle.index');
+Route::get('/entradadetalle/crear/{id}',[DetalleEntradaController::class,'create'])->name('entrada.detalle.create');
+Route::post('/entradadetalle/guardar',[DetalleEntradaController::class,'store'])->name('entrada.detalle.store');
+Route::get('/entradadetalle/editar/{id}',[DetalleEntradaController::class,'edit'])->name('entrada.detalle.edit');
+Route::put('/entradadetalle/actualizar/{id}', [DetalleEntradaController::class, 'update'])->name('entrada.detalle.update');
+Route::delete('/entradadetalle/eliminar/{id}', [DetalleEntradaController::class, 'destroy'])->name('entrada.detalle.destroy');
 
 
 
