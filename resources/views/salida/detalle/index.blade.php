@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'DETALLE DOCUMENTO ENTRADA')
+@section('title', 'DETALLE DOCUMENTO SALIDA')
 
 @section('content_header')
     <h1>DETALLE DOCUMENTO </h1>
@@ -28,7 +28,7 @@
 <div class="row">
 <div class="col-lg-12 margin-tb">
 <div class="row">
-<div class="col-10 border-right"><a class="btn btn-success" href="{{ route('entrada.detalle.create',$entrada->id) }}">Agregar Materia prima</a>
+<div class="col-10 border-right"><a class="btn btn-success" href="{{ route('salida.detalle.create',$salida->id) }}">Agregar Materia prima</a>
 </div>
 <div class="col-2">
 </div>
@@ -44,18 +44,18 @@
 <th>Fecha Emision</th>
 <th>Fecha Vencimiento</th>
 <tr>
-  <td>{{ $entrada->id }}</td>
-@if ($entrada->tipo_documento==1)
+  <td>{{ $salida->id }}</td>
+@if ($salida->tipo_documento==1)
 <td>Factura</td>
 @else 
 <td>Guia Despacho</td>
 @endif  
-<td>{{ $entrada->numero_documento }}</td>
+<td>{{ $salida->numero_documento }}</td>
 
-<td>{{ $entrada->empresa->nombre_empresa }}</td>
+<td>{{ $salida->empresa->nombre_empresa }}</td>
 
-<td>{{ $entrada->fecha_emision }}</td>
-<td>{{ $entrada->fecha_vencimiento }}</td>
+<td>{{ $salida->fecha_emision }}</td>
+<td>{{ $salida->fecha_vencimiento }}</td>
 <td>
 </td>
 
@@ -82,7 +82,7 @@
     $resultado=0;
     ?>
       
-     @foreach ($detalles_entrada as $detalle)
+     @foreach ($detalles_salida as $detalle)
     
     <tr>
     <td>{{ $detalle->id }}</td>
@@ -100,9 +100,9 @@
     <td>{{ number_format($detalle->cantidad_materia_prima*$detalle->costo, 2)}}</td>
     
     <td>
-    <form action="{{ route('entrada.detalle.destroy',$detalle->id) }}" method="Post" onsubmit="return confirm('¿Desea eliminar este registro?');">
+    <form action="{{ route('salida.detalle.destroy',$detalle->id) }}" method="Post" onsubmit="return confirm('¿Desea eliminar este registro?');">
     
- <a class="btn btn-primary" href="{{ route('entrada.detalle.edit', $detalle->id) }}">Edit</a>
+ <a class="btn btn-primary" href="{{ route('salida.detalle.edit', $detalle->id) }}">Edit</a>
 
  @csrf
 @method('DELETE')

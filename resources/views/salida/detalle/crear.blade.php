@@ -28,10 +28,10 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-            <form action="{{ route('entrada.detalle.store') }}" method="POST">
+            <form action="{{ route('salida.detalle.store') }}" method="POST">
                 @csrf
                   <div class="form-group">
-                  <input type="hidden" class="form-control" id="id_encabezado_entrada" name="id_encabezado_entrada" value="{{ $encabezado_entrada->id }}" >
+                  <input type="hidden" class="form-control" id="id_encabezado_salida" name="id_encabezado_salida" value="{{ $encabezado_salida->id }}" >
                   </div>
                   
                 
@@ -53,8 +53,8 @@
                   <input type="text" class="form-control" id="unidad_medida" name="unidad_medida" placeholder="unidad_medida">
                 </div>
                 <div class="form-group">
-                  <label for="costo">Costo</label>
-                  <input type="text" class="form-control" id="costo" name="costo" placeholder="costo">
+                  <label for="venta">Venta</label>
+                  <input type="text" class="form-control" id="venta" name="venta" placeholder="venta">
                 </div>
                 <div class="form-group">
                   <label for="serie">Serie</label>

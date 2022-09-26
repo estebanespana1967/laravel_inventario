@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'ENTRADA')
+@section('title', 'SALIDA')
 
 @section('content_header')
-    <h1>CREAR ENTRADA</h1>
+    <h1>CREAR SALIDA</h1>
 @stop
 
 @section('content')
@@ -22,7 +22,7 @@
                         </button>
                         </div>
                     @endif    
-            <form action="{{ route('entrada.encabezado.store') }}" method="POST">
+            <form action="{{ route('salida.encabezado.store') }}" method="POST">
                 @csrf
                   <div class="form-group">
                   <label for="nombre">Tipo Documento</label>

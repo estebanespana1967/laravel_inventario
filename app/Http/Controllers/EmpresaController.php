@@ -50,6 +50,7 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
     $request->validate([
+    'tipo_empresa' => ['required'],
     'rut_empresa' => ['required', 'max:8'],
     'dv_empresa' => ['required', 'max:1'],
     'nombre_empresa' => ['required'],

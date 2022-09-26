@@ -13,7 +13,7 @@ class Historial_precio extends Model
     //columnas de uso masivo
     protected $fillable = [
         'id_materia_prima',
-        'precio_neto',
+        'precio_compra',
         'precio_venta',
         'fecha_precio'
     ]; 

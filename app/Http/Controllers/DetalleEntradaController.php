@@ -5,6 +5,7 @@ use App\Models\Encabezado_entrada;
 use App\Models\Empresa;
 use App\Models\Detalle_entrada;
 use App\Models\Materia_prima;
+use App\Models\Historial_precio;
 
 use Illuminate\Http\Request;
 
@@ -59,12 +60,41 @@ class DetalleEntradaController extends Controller
             'cantidad_materia_prima' => ['required'],
             'unidad_medida' => ['required'],
             'costo' => ['required'],
+            'venta' => ['required'],
             'lote' => ['required'],
-            'fecha_vencimiento' => ['required']
+            'serie' => ['required'],
+           'fecha_vencimiento' => ['required']
                      
         ]);
+            $detalle_entrada=new Detalle_entrada();
+            $detalle_entrada->id_encabezado_entrada=$request->id_encabezado_entrada;
+            $detalle_entrada->id_materia_prima=$request->id_materia_prima;
+            $detalle_entrada->cantidad_materia_prima=$request->cantidad_materia_prima;
+            $detalle_entrada->unidad_medida=$request->unidad_medida;
+            $detalle_entrada->costo=$request->costo;
+            $detalle_entrada->lote=$request->lote;
+            $detalle_entrada->serie=$request->serie;
+            
+            $detalle_entrada->fecha_vencimiento=$request->fecha_vencimiento;
+            $detalle_entrada->save();
 
-            Detalle_entrada::create($request->all());
+            
+            /* $materia_prima=Materia_prima::find($request->id_materia_prima)->update(array('stock' => 'asdasd'));;
+             */
+            // aqui va la actualizacion de la columna stock que esta en la tabla materia prima
+            //luego hay que insertar un registro en le tabla movimiento
+            // algo parecido tenemos que hacee en update
+
+            if ($request->venta != $request->ultimo_precio){
+            $historial_precio= new Historial_precio();
+            $historial_precio->id_materia_prima=$request->id_materia_prima;
+            $historial_precio->precio_compra=$request->costo;
+            $historial_precio->fecha_precio="2022-09-25";
+            $historial_precio->precio_venta=$request->venta;
+            $historial_precio->id_detalle_entrada=$detalle_entrada->id;
+            
+            $historial_precio->save();
+        }
             $encabezado_id=$request->id_encabezado_entrada;
             return redirect()->route('entrada.detalle.index',$encabezado_id)->with('success','Registro creado exitosamente');
         
@@ -116,12 +146,33 @@ class DetalleEntradaController extends Controller
             'unidad_medida' => ['required'],
             'costo' => ['required'],
             'lote' => ['required'],
-            'fecha_vencimiento' => ['required']
+            'serie' => ['required'],
+             'fecha_vencimiento' => ['required']
                      
         ]);
 
             
             $detalle_entrada=Detalle_entrada::find($id);
+            $detalle_entrada->id_encabezado_entrada=$request->id_encabezado_entrada;
+            $detalle_entrada->id_materia_prima=$request->id_materia_prima;
+            $detalle_entrada->cantidad_materia_prima=$request->cantidad_materia_prima;
+            $detalle_entrada->unidad_medida=$request->unidad_medida;
+            $detalle_entrada->costo=$request->costo;
+            $detalle_entrada->lote=$request->lote;
+            $detalle_entrada->serie=$request->serie;
+            
+            $detalle_entrada->fecha_vencimiento=$request->fecha_vencimiento;
+            $detalle_entrada->update();
+
+            if ($request->venta != $request->ultimo_precio){
+            $historial_precio= Historial_precio::where('id_detalle_entrada', $detalle_entrada->id)->get();
+            $historial_precio->id_materia_prima=$request->id_materia_prima;
+            $historial_precio->precio_compra=$request->costo;
+            $historial_precio->fecha_precio=$request->fecha_precio;
+            $historial_precio->precio_venta=$request->venta;
+            $historial_precio->update();
+        }
+    
             $detalle_entrada->update($request->all());
             $encabezado_id=$request->id_encabezado_entrada;
             return redirect()->route('entrada.detalle.index',$encabezado_id)->with('success','Registro actualizado exitosamente');
@@ -142,8 +193,10 @@ class DetalleEntradaController extends Controller
         
         $detalle_entrada=Detalle_entrada::find($id);
         $encabezado_id=$detalle_entrada->id_encabezado_entrada;
+        $historial_precio= Historial_precio::where('id_detalle_entrada', $detalle_entrada->id)->get();
         
         $detalle_entrada->delete();
+        $historial_precio->delete();
         return redirect()->route('entrada.detalle.index',$encabezado_id)->with('destroy','Registro eliminado exitosamente');
     
     }

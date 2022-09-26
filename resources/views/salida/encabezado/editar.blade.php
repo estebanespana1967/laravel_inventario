@@ -27,13 +27,13 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-            <form action="{{ route('entrada.encabezado.update', $entrada->id) }}" method="POST">
+            <form action="{{ route('salida.encabezado.update', $salida->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                   <label for="nombre">Tipo Documento</label>
                   <select class="form-control" name="tipo_documento">
-                  @if ($entrada->tipo_documento==1)
+                  @if ($salida->tipo_documento==1)
                   <option value="1" selected>Factura</option>
                   <option value="2">Guia Despacho</option>
                   
@@ -46,14 +46,14 @@
                 </div>
                 <div class="form-group">
                   <label for="nombre">Numero Documento</label>
-                  <input type="text" class="form-control text-uppercase" id="numero_documento" name="numero_documento" placeholder="Ingresa el numero de documento"   value = "{{$entrada->numero_documento}}">
+                  <input type="text" class="form-control text-uppercase" id="numero_documento" name="numero_documento" placeholder="Ingresa el numero de documento"   value = "{{$salida->numero_documento}}">
                 </div>
                 <div class="form-group">
                   <label for="nombre">Nombre Empresa</label>
                   <select class="form-control" name="id_empresa">
                   <option selected disabled>Seleccionar</option>
                   @foreach ($empresas as $empresa)
-                  @if($empresa->id==$entrada->id_empresa)
+                  @if($empresa->id==$salida->id_empresa)
                   <option value="{{ $empresa->id}}" selected>{{ $empresa->nombre_empresa }}</option>
                   @else
                   <option value="{{ $empresa->id}}">{{ $empresa->nombre_empresa }}</option>
@@ -64,11 +64,11 @@
                 
                 <div class="form-group">
                   <label for="nombre">Fecha Emision</label>
-                  <input type="date" class="form-control text-uppercase" id="fecha_emision" name="fecha_emision" value="{{$entrada->fecha_emision}}" >
+                  <input type="date" class="form-control text-uppercase" id="fecha_emision" name="fecha_emision" value="{{$salida->fecha_emision}}" >
                 </div>
                 <div class="form-group">
                   <label for="nombre">Fecha Vencimiento</label>
-                  <input type="date" class="form-control text-uppercase" id="fecha_vencimiento" name="fecha_vencimiento"  value="{{$entrada->fecha_vencimiento}}">
+                  <input type="date" class="form-control text-uppercase" id="fecha_vencimiento" name="fecha_vencimiento"  value="{{$salida->fecha_vencimiento}}">
                 </div>
                  
 

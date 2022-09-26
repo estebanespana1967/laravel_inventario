@@ -351,7 +351,7 @@ return [
                 ],
                 [
                     'text' => 'Salidas',
-                    'url'  => '/inventario/salidas',
+                    'url'  => '/salidaencabezado',
                 ],
                 [
                     'text' => 'Movimientos',

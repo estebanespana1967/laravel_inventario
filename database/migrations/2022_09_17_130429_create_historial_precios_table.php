@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('historial_precios', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_materia_prima');
-            $table->double('precio_neto', 8, 2);
+            $table->double('precio_compra', 8, 2);
             $table->double('precio_venta', 8, 2);
             $table->date('fecha_precio');
             $table->timestamps();

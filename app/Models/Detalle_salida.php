@@ -17,7 +17,7 @@ class Detalle_salida extends Model
        'id_materia_prima',
        'cantidad_materia_prima',
        'unidad_medida',
-       'costo',
+       'venta',
        'serie',
        'lote',
        'fecha_vencimiento',

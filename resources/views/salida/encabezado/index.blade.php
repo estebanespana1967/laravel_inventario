@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'ENTRADA')
+@section('title', 'SALIDA')
 
 @section('content_header')
-    <h1>ENCABEZADO ENTRADA</h1>
+    <h1>ENCABEZADO SALIDA</h1>
 @stop
 
 @section('content')
@@ -28,11 +28,11 @@
     <div class="row">
 <div class="col-sm">
 <div class="pull-right mb-2">
-<a class="btn btn-success" href="{{ route('entrada.encabezado.create') }}"> Crear Entrada</a>
+<a class="btn btn-success" href="{{ route('salida.encabezado.create') }}"> Crear Salida</a>
 </div>
 </div>
 <div class="col-sm">
-<form action="{{ route('entrada.encabezado.index') }}" method="get">
+<form action="{{ route('salida.encabezado.index') }}" method="get">
 <div class="input-group float-right">
 <select class="form-control" name="termino_busqueda">
     <option value="1" selected>Nombre Empresa</option>
@@ -57,26 +57,24 @@
 <th>Fecha Emision</th>
 <th>Fecha Vencimiento</th>
 <th width="280px">Acción</th></tr>
-@foreach ($entradas as $entrada)
+@foreach ($salidas as $salida)
 <tr>
-  <td>{{ $entrada->id }}</td>
-@if ($entrada->tipo_documento==1)
+  <td>{{ $salida->id }}</td>
+@if ($salida->tipo_documento==1)
 <td>Factura</td>
 @else 
 <td>Guia Despacho</td>
 @endif  
-<td>{{ $entrada->numero_documento }}</td>
-
-<td>{{ $entrada->empresa->nombre_empresa }}</td>
-
-<td>{{ $entrada->fecha_emision }}</td>
-<td>{{ $entrada->fecha_vencimiento }}</td>
+<td>{{ $salida->numero_documento }}</td>
+<td>{{ $salida->empresa->nombre_empresa }}</td>
+<td>{{ $salida->fecha_emision }}</td>
+<td>{{ $salida->fecha_vencimiento }}</td>
 <td>
 
-<form action="{{ route('entrada.encabezado.destroy',$entrada->id) }}" method="Post" onsubmit="return confirm('¿Desea eliminar este registro?');">
-<a class="btn btn-warning" href="{{ route('entrada.detalle.index',$entrada->id) }}">Detalle</a>
+<form action="{{ route('salida.encabezado.destroy',$salida->id) }}" method="Post" onsubmit="return confirm('¿Desea eliminar este registro?');">
+<a class="btn btn-warning" href="{{ route('salida.detalle.index',$salida->id) }}">Detalle</a>
 
-<a class="btn btn-primary" href="{{ route('entrada.encabezado.edit',$entrada->id) }}">Editar</a>
+<a class="btn btn-primary" href="{{ route('salida.encabezado.edit',$salida->id) }}">Editar</a>
 @csrf
 @method('DELETE')
 <button type="submit" class="btn btn-danger">Borrar</button>
@@ -86,7 +84,7 @@
 @endforeach
 </table>
 <div class="pagination justify-content-end">
-{!! $entradas->links() !!}
+{!! $salidas->links() !!}
 </div>
 @stop
 

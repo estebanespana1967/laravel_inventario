@@ -53,9 +53,20 @@
                   <input type="text" class="form-control" id="unidad_medida" name="unidad_medida" placeholder="unidad_medida">
                 </div>
                 <div class="form-group">
-                  <label for="costo">Costo</label>
+                <div class="row">
+                  <div class="col-sm">
+                    <label for="costo">Costo</label>
                   <input type="text" class="form-control" id="costo" name="costo" placeholder="costo">
                 </div>
+                  <div class="col-sm"><label for="venta">Venta</label>
+                  <input type="text" class="form-control" id="venta" name="venta" placeholder="venta">
+                </div>
+                  <div class="col-sm"><label for="ultimo_precio">Ultimo precio</label>
+                  <input type="text" class="form-control" id="ultimo_precio" name="ultimo_precio" placeholder="costo">
+                </div>
+                  
+                  </div>  
+                  </div>
                 <div class="form-group">
                   <label for="serie">Serie</label>
                   <input type="text" class="form-control" id="serie" name="serie" placeholder="serie">

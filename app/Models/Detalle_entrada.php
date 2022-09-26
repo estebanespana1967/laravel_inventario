@@ -29,7 +29,7 @@ class Detalle_entrada extends Model
     {
         return $this->belongsTo(Materia_prima::class, 'id_materia_prima');
     }
-    // relacion 1 a muchos, un detalle puede estar en 1 encabezado, y se colocoa en
+    // relacion 1 a muchos, un detalle puede estar en 1 encabezados, y se colocoa en
 //  el parentesis nombre de la columna que hace referencia
 
 public function encabezado_entrada()

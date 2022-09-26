@@ -28,11 +28,11 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-            <form action="{{ route('entrada.detalle.update',$detalle_entrada->id) }}" method="POST">
+            <form action="{{ route('salida.detalle.update',$detalle_salida->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                   <div class="form-group">
-                  <input type="hidden" class="form-control" id="id_encabezado_entrada" name="id_encabezado_entrada" value="{{ $detalle_entrada->id_encabezado_entrada }}" >
+                  <input type="hidden" class="form-control" id="id_encabezado_salida" name="id_encabezado_salida" value="{{ $detalle_salida->id_encabezado_salida }}" >
                   </div>
                   
                 
@@ -41,7 +41,7 @@
                   <select class="form-control" name="id_materia_prima">
                   <option selected disabled>Seleccionar</option>
                   @foreach ($materia_primas as $materia_prima)
-                  @if ($materia_prima->id == $detalle_entrada->id_materia_prima )
+                  @if ($materia_prima->id == $detalle_salida->id_materia_prima )
                   
                   <option value="{{ $materia_prima->id}}" selected>{{ $materia_prima->nombre_mp }}</option>
                   @else
@@ -53,27 +53,27 @@
                 </div>
                 <div class="form-group">
                   <label for="cantidad_materia_prima">Cantidad materia prima</label>
-                  <input type="text" class="form-control" id="cantidad_materia_prima" name="cantidad_materia_prima" value="{{ $detalle_entrada->cantidad_materia_prima}}">
+                  <input type="text" class="form-control" id="cantidad_materia_prima" name="cantidad_materia_prima" value="{{ $detalle_salida->cantidad_materia_prima}}">
                 </div>
                 <div class="form-group">
                   <label for="unidad_medida">Unidad de medida</label>
-                  <input type="text" class="form-control" id="unidad_medida" name="unidad_medida"  value="{{ $detalle_entrada->unidad_medida }}">
+                  <input type="text" class="form-control" id="unidad_medida" name="unidad_medida"  value="{{ $detalle_salida->unidad_medida }}">
                 </div>
                 <div class="form-group">
                   <label for="costo">Costo</label>
-                  <input type="text" class="form-control" id="costo" name="costo"  value="{{ $detalle_entrada->costo }}">
+                  <input type="text" class="form-control" id="costo" name="costo"  value="{{ $detalle_salida->costo }}">
                 </div>
                 <div class="form-group">
                   <label for="serie">Serie</label>
-                  <input type="text" class="form-control" id="serie" name="serie"  value="{{ $detalle_entrada->serie }}">
+                  <input type="text" class="form-control" id="serie" name="serie"  value="{{ $detalle_salida->serie }}">
                 </div>
                 <div class="form-group">
                   <label for="lote">Lote</label>
-                  <input type="text" class="form-control" id="lote" name="lote"  value="{{ $detalle_entrada->lote }}">
+                  <input type="text" class="form-control" id="lote" name="lote"  value="{{ $detalle_salida->lote }}">
                 </div>
                 <div class="form-group">
                   <label for="fecha_vencimiento">Fecha Vencimiento</label>
-                  <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"  value="{{ $detalle_entrada->fecha_vencimiento }}">
+                  <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento"  value="{{ $detalle_salida->fecha_vencimiento }}">
                 </div>
                         <button type="submit" class="btn btn-primary">Actualizar</button>
               </form>

@@ -14,6 +14,9 @@ use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\DetalleEntradaController;
+use App\Http\Controllers\SalidaController;
+use App\Http\Controllers\DetalleSalidaController;
+
 
 
 use App\Http\Livewire\Productos;
@@ -179,6 +182,19 @@ Route::get('/entradadetalle/editar/{id}',[DetalleEntradaController::class,'edit'
 Route::put('/entradadetalle/actualizar/{id}', [DetalleEntradaController::class, 'update'])->name('entrada.detalle.update');
 Route::delete('/entradadetalle/eliminar/{id}', [DetalleEntradaController::class, 'destroy'])->name('entrada.detalle.destroy');
 
+Route::get('/salidaencabezado',[SalidaController::class,'index'])->name('salida.encabezado.index');
+Route::get('/salidaencabezado/crear',[SalidaController::class,'create'])->name('salida.encabezado.create');
+Route::post('/salidaencabezado/guardar',[SalidaController::class,'store'])->name('salida.encabezado.store');
+Route::get('/salidaencabezado/editar/{id}',[SalidaController::class,'edit'])->name('salida.encabezado.edit');
+Route::put('/salidaencabezado/actualizar/{id}', [SalidaController::class, 'update'])->name('salida.encabezado.update');
+Route::delete('/salidaencabezado/eliminar/{id}', [SalidaController::class, 'destroy'])->name('salida.encabezado.destroy');
+
+Route::get('/salidadetalle/{id}',[DetalleSalidaController::class,'index'])->name('salida.detalle.index');
+Route::get('/salidadetalle/crear/{id}',[DetalleSalidaController::class,'create'])->name('salida.detalle.create');
+Route::post('/salidadetalle/guardar',[DetalleSalidaController::class,'store'])->name('salida.detalle.store');
+Route::get('/salidadetalle/editar/{id}',[DetalleSalidaController::class,'edit'])->name('salida.detalle.edit');
+Route::put('/salidadetalle/actualizar/{id}', [DetalleSalidaController::class, 'update'])->name('salida.detalle.update');
+Route::delete('/salidadetalle/eliminar/{id}', [DetalleSalidaController::class, 'destroy'])->name('salida.detalle.destroy');
 
 
 

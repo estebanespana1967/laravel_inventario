@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_materia_prima');
             $table->double('cantidad_materia_prima', 8, 2);
             $table->string('unidad_medida');
-            $table->double('costo', 8, 2);
+            $table->double('venta', 8, 2);
             $table->string('serie');
             $table->string('lote');
             $table->date('fecha_vencimiento');
