@@ -6,6 +6,8 @@ use App\Models\Empresa;
 use App\Models\Detalle_entrada;
 use App\Models\Materia_prima;
 use App\Models\Historial_precio;
+use Carbon\Carbon;
+
 
 use Illuminate\Http\Request;
 
@@ -76,11 +78,17 @@ class DetalleEntradaController extends Controller
             $detalle_entrada->serie=$request->serie;
             
             $detalle_entrada->fecha_vencimiento=$request->fecha_vencimiento;
+            $detalle_entrada->status_mp='SELLADO';
+            $detalle_entrada->stock_mp=$request->cantidad_materia_prima;
+            
             $detalle_entrada->save();
 
             
-            /* $materia_prima=Materia_prima::find($request->id_materia_prima)->update(array('stock' => 'asdasd'));;
-             */
+             $materia_prima=Materia_prima::find($request->id_materia_prima);
+             $stock_nuevo=$materia_prima->stock+$request->cantidad_materia_prima;
+             $materia_prima->stock=$stock_nuevo;
+             $materia_prima->update();
+             
             // aqui va la actualizacion de la columna stock que esta en la tabla materia prima
             //luego hay que insertar un registro en le tabla movimiento
             // algo parecido tenemos que hacee en update
@@ -162,6 +170,18 @@ class DetalleEntradaController extends Controller
             $detalle_entrada->serie=$request->serie;
             
             $detalle_entrada->fecha_vencimiento=$request->fecha_vencimiento;
+            $detalle_entrada->status_mp=$detalle_entrada->status_mp;
+            if ($detalle_entrada->status_mp=='SELLADO') {
+           
+                $detalle_entrada->stock_mp=$request->cantidad_materia_prima;
+            } else {
+            
+                $detalle_entrada->stock_mp=$detalle_entrada->stock_mp;
+            
+            }
+            
+            $detalle_entrada->stock_mp=$detalle_entrada->stock_mp;
+            
             $detalle_entrada->update();
 
             if ($request->venta != $request->ultimo_precio){
@@ -207,8 +227,47 @@ class DetalleEntradaController extends Controller
         $encabezado_entrada=Encabezado_entrada::find($id);
         /* dd($cotizacion_detalle); */
         $detalle_entrada=Detalle_entrada::where('id_encabezado_entrada',$id)->get();
-        /* dd($preparados); */
+        /* dd($preparados); */$mp_entradas=Detalle_entrada::paginate(3);
+ 
         return redirect()->route('entrada.detalle.index', [$id]);
     }        
 
+    
+    public function mp_status_index(Request $request)
+    {
+               
+        $nombre = $request->nombre;
+        if ($request->termino_busqueda==0){
+        $mp_entradas=Detalle_entrada::orderBy('fecha_vencimiento', 'asc')
+        ->paginate(5);
+        
+        } elseif ($request->termino_busqueda==1){
+        
+          
+        $id_materia_prima=Materia_prima::where('nombre_mp', 'LIKE', '%'.$nombre.'%')
+        ->select('id')->get();
+        $mp_entradas=Detalle_entrada::whereIn('id_materia_prima',$id_materia_prima)
+        ->orderBy('fecha_vencimiento', 'asc')
+        ->paginate(5);
+      
+    
+    } elseif ($request->termino_busqueda==2){
+        $currentDateTime = Carbon::parse($nombre);
+        $fecha_final = ($currentDateTime->addDays(90))->format('Y-m-d');
+        $fecha_inicial = ($currentDateTime->subDays(90))->format('Y-m-d');
+        dd($fecha_inicial);
+
+        $mp_entradas=Detalle_entrada::whereBetween('fecha_vencimiento', array($fecha_inicial, $fecha_final))
+        ->orderBy('fecha_vencimiento', 'asc')
+        ->paginate(5);
+
+   } else {
+  
+    $mp_entradas=Detalle_entrada::where('status_mp',$nombre)
+    ->orderBy('fecha_vencimiento', 'asc')
+    ->paginate(5);
+  
+    }
+    return view('materia_prima_status.index', compact('mp_entradas','nombre'));
+    }
 }

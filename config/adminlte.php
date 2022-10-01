@@ -275,11 +275,19 @@ return [
             'label_color' => 'success',
         ],
         [
-            'text'        => 'RECETA',
-            'url'         => '/receta',
-            'icon'        => 'fas fa-fw fa-prescription',
-            //'label'       => 4,
-            'label_color' => 'success',
+            
+            'text'    => 'RECETA',
+            'icon'    => 'fas fa-fw fa-prescription',
+            'submenu' => [
+                [
+                    'text' => 'Por Paciente',
+                    'url'  => '/receta',
+                ],
+                [
+                    'text' => 'Por Fecha/numero',
+                    'url'  => '/receta_fecha',
+                ],
+            ], 
         ],
         [
             'text'        => 'PACIENTE',
@@ -358,8 +366,12 @@ return [
                     'url'  => '/inventario/movimientos',
                 ],
                 [
-                    'text' => 'Historial Precios',
-                    'url'  => '/inventario/historial_precios',
+                    'text' => 'Historial Precio',
+                    'url'  => '/historial_precio',
+                ],
+                [
+                    'text' => 'Status Materia Prima',
+                    'url'  => '/materia_prima_status',
                 ],
             ],
         ],
@@ -367,6 +379,13 @@ return [
             'text'        => 'EMPRESAS',
             'url'         => '/empresas',
             'icon'        => 'fa fa-fw fa-industry',
+            //'label'       => 4,
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'RESPONSABLES',
+            'url'         => '/responsable',
+            'icon'        => 'fa fa-user-secret',
             //'label'       => 4,
             'label_color' => 'success',
         ],

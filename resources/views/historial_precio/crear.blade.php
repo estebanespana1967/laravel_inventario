@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'ENTRADA')
+@section('title', 'HISTORIAL PRECIOS')
 
 @section('content_header')
-    <h1>CREAR ENTRADA</h1>
+    <h1>HISTORIAL PRECIOS</h1>
 @stop
 
 @section('content')
-    <div class="row">
+<div class="row">
         <div class="col-1"></div>
         <div class="col-10">
         @if ($errors->any())
@@ -22,51 +22,55 @@
                         </button>
                         </div>
                     @endif    
-            <form action="{{ route('entrada.encabezado.store') }}" method="POST">
+            <form action="{{ route('historial_precio.store') }}" method="POST">
                 @csrf
                   <div class="form-group">
-                  <label for="nombre">Tipo Documento</label>
-                  <select class="form-control" name="tipo_documento">
-                  <option value="1" selected>Factura</option>
-                  <option value="2">Guia Despacho</option>
-                  </select>
+                  <label for="nombre">id</label>
+                  <input type="text" class="form-control" id="id" name="id" placeholder="Ingresa el rut del historial_precio" >
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Numero Documento</label>
-                  <input type="text" class="form-control text-uppercase" id="numero_documento" name="numero_documento" placeholder="Ingresa el numero de documento"  maxlength="28">
+                  <label for="nombre">materia prima</label>
+                  <input type="text" class="form-control" id="id_materia_prima" name="id_materia_prima" readonly value="{{ $historial_precio->id_materia_prima }}"  >
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Nombre Empresa</label>
-                  <select class="form-control" name="id_empresa">
-                  <option selected disabled>Seleccionar</option>
-                  @foreach ($empresas as $empresa)
-                  <option value="{{ $empresa->id}}">{{ $empresa->nombre_empresa }}</option>
-                  @endforeach
-                  </select>
+                  <label for="nombre">Precio compra</label>
+                  <input type="text" class="form-control" id="precio_compra" name="precio_compra" readonly value="{{ $historial_precio->precio_compra }}" >
+                </div>
+                <div class="form-group">
+                  <label for="nombre">Precio venta</label>
+                  <input type="text" class="form-control" id="precio_venta" name="precio_venta" readonly value="{{ $historial_precio->precio_venta }}" >
+                </div>
+                <div class="form-group">
+                  <label for="nombre">Fecha precio</label>
+                  <input type="text" class="form-control" id="fecha_precio" name="fecha_precio" readonly value="{{ $historial_precio->fecha_precio }}" >
                 </div>
                 
                 <div class="form-group">
-                  <label for="nombre">Fecha Emision</label>
-                  <input type="date" class="form-control text-uppercase" id="fecha_emision" name="fecha_emision" >
+                  <label for="descripcion">id_detalle_entrada</label>
+                  <input type="text" class="form-control" id="id_detalle_entrada"  name="id_detalle_entrada" placeholder="Ingresa el cargo" value="{{ $historial_precio->id_detalle_entrada }}">
+                </div>
+                
+                
+                
+                <div class="form-group">
+                  <label for="nombre">dv</label>
+                  <input type="text" class="form-control" id="dv_responsable" name="dv_responsable" placeholder="Ingresa el dv del historial_precio" >
+                </div>
+                
+                <div class="form-group">
+                  <label for="nombre">Nombre Apellido</label>
+                  <input type="text" class="form-control text-uppercase" id="nombre_apellido" name="nombre_apellido" placeholder="Ingresa el nombre y apellido del historial_precio"  maxlength="28">
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Fecha Vencimiento</label>
-                  <input type="date" class="form-control text-uppercase" id="fecha_vencimiento" name="fecha_vencimiento" placeholder="Ingresa la fecha vencimiento"  maxlength="28">
+                  <label for="descripcion">Cargo</label>
+                  <input type="text" class="form-control" id="cargo"  name="cargo" placeholder="Ingresa el cargo">
                 </div>
-                <div class="form-group">
-                  <label for="nombre">Responsable</label>
-                  <select class="form-control" name="id_responsable">
-                  <option selected disabled>Seleccionar</option>
-                  @foreach ($responsables as $responsable)
-                  <option value="{{ $responsable->id}}">{{ $responsable->nombre_apellido }}</option>
-                  @endforeach
-                  </select>
-                </div> 
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-primary" >Crear Responsable</button>
               </form>
         </div>
         <div class="col-1"></div>
     </div>
+
 @stop
 
 @section('css')
@@ -74,7 +78,6 @@
 @stop
 
 @section('js')
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     function VerificaRut(rut) {
@@ -118,6 +121,7 @@
     else {
         return false;
     }
-}   
-</script> 
+}
+</script>
+    
 @stop

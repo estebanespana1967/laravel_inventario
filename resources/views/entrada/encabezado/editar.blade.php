@@ -70,7 +70,19 @@
                   <label for="nombre">Fecha Vencimiento</label>
                   <input type="date" class="form-control text-uppercase" id="fecha_vencimiento" name="fecha_vencimiento"  value="{{$entrada->fecha_vencimiento}}">
                 </div>
-                 
+                <div class="form-group">
+                  <label for="nombre">Nombre Responsable</label>
+                  <select class="form-control" name="id_responsable">
+                  <option selected disabled>Seleccionar</option>
+                  @foreach ($responsables as $responsable)
+                  @if($responsable->id==$entrada->id_responsable)
+                  <option value="{{ $responsable->id}}" selected>{{ $responsable->nombre_apellido }}</option>
+                  @else
+                  <option value="{{ $responsable->id}}">{{ $responsable->nombre_apellido }}</option>
+                  @endif
+                  @endforeach
+                  </select>
+                </div>
 
                 <button type="submit" class="btn btn-primary">Editar</button>
               </form>

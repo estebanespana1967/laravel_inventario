@@ -12,6 +12,8 @@ use App\Models\Persona;
 use App\Models\BaseCrema;
 use App\Models\BaseCotizacion;
 use App\Models\Convenio;
+use App\Models\Detalle_entrada;
+
 
 use Carbon\Carbon;
 
@@ -301,8 +303,30 @@ $valor_gramomp=0;
         } else {
         return view('cotizacioncapsula.detalle_semisolido.ver_index', compact('paciente','cotizaciones','cotizacion_detalle'));
         }
-        
     }
+
+    public function ver_index_status($id)
+    {
+        $cotizacion_detalle=CotizacionDetalle::find($id);
+        $cotizacion_existe=Receta::where('numero_interno',$id)->select('id')->get(); 
+        $paciente=Paciente::find($cotizacion_detalle->paciente_id);
+        $cotizaciones=Cotizacion::where('cotizacion_detalle_id',$id)->orderBy('materia_prima_id')->get();
+        $cotizaciones_mp=Cotizacion::where('cotizacion_detalle_id',$id)->select('materia_prima_id')->get();
+        $detalle_entrada=Detalle_entrada::whereIn('id_materia_prima',$cotizaciones_mp)
+        ->where('status_mp',"EN USO")
+        ->select('id_materia_prima','serie','lote','fecha_vencimiento','id')->orderBy('id_materia_prima')->get();
+
+
+        if ($cotizacion_detalle->tipo_cotizacion ==1){
+        return view('cotizacioncapsula.detalle_capsula.ver_index_status', compact('detalle_entrada','paciente','cotizaciones','cotizacion_detalle'));
+        } else {
+        return view('cotizacioncapsula.detalle_semisolido.ver_index_status', compact('detalle_entrada','paciente','cotizaciones','cotizacion_detalle'));
+        }
+    }
+
+
+
+
     public function crearMateriaPrima($cotizacion_id)
     {
         $cotizacion=CotizacionDetalle::find($cotizacion_id);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Encabezado_entrada;
 use App\Models\Empresa;
+use App\Models\Responsable;
 
 
 class EntradaController extends Controller
@@ -32,7 +33,9 @@ class EntradaController extends Controller
     {
         //
     $empresas = Empresa::all();
-    return view('entrada.encabezado.crear', compact('empresas'));
+    $responsables = Responsable::all();
+    
+    return view('entrada.encabezado.crear', compact('empresas','responsables'));
   
     }
 
@@ -88,7 +91,9 @@ class EntradaController extends Controller
         //
         $entrada = Encabezado_entrada::find($id);
         $empresas = Empresa::all();
-        return view('entrada.encabezado.editar', compact('entrada','empresas'));
+        $responsables = Responsable::all();
+
+        return view('entrada.encabezado.editar', compact('entrada','empresas','responsables'));
 
     }
 

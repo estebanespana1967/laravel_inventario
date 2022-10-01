@@ -20,8 +20,7 @@ class ReporteController extends Controller
             /* $paciente = Paciente::find($id); */
            /*  $fecha = $request->nombr; */
            $materia_primas=Materia_prima::where('controlado','S')->orderBy('id','desc')->get();
-           
-            $recetas=Receta::where('fecha_recepcion','%%')->orderBy('id','desc')->get();
+           $recetas=Receta::where('fecha_recepcion','%%')->orderBy('id','desc')->get();
             return view('reportesMp.index', compact('recetas','materia_primas'));
         }
         
@@ -133,5 +132,25 @@ class ReporteController extends Controller
             return view('reportesMp.solicitarposicion', compact('cotizacion_id','receta','cotizacion'));
 
         }
+        public function reportes_receta(Request $request)
+        {
+           $recetas=Receta::where('fecha_recepcion','%%')->orderBy('id','desc')->get();
+            return view('receta_fecha.index', compact('recetas'));
+        }
+        public function corregir_receta(Request $request)
+        {
+         
+           $from = date($request->fecha_inicial);
+           $to = date($request->fecha_final);
+           
+                   $recetas=Receta::whereIn('numero_interno', $id_cotizaciones)
+           // ->whereBetween('fecha_receta', [$from, $to])
+           ->where("fecha_receta",">=",$from)
+           ->where("fecha_receta","<=",$to)
+           ->orderBy('id','desc')->get();
+        
+            return view('receta_fecha.index2', compact('recetas'));
+        }
+        
 
 }

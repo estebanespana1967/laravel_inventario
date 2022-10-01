@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'ENTRADA')
+@section('title', 'RESPONSABLE')
 
 @section('content_header')
-    <h1>CREAR ENTRADA</h1>
+    <h1>CREAR RESPONSABLE</h1>
 @stop
 
 @section('content')
-    <div class="row">
+<div class="row">
         <div class="col-1"></div>
         <div class="col-10">
         @if ($errors->any())
@@ -22,43 +22,54 @@
                         </button>
                         </div>
                     @endif    
-            <form action="{{ route('entrada.encabezado.store') }}" method="POST">
+            <form action="{{ route('responsable.store') }}" method="POST">
                 @csrf
                   <div class="form-group">
-                  <label for="nombre">Tipo Documento</label>
-                  <select class="form-control" name="tipo_documento">
-                  <option value="1" selected>Factura</option>
-                  <option value="2">Guia Despacho</option>
-                  </select>
+                  <label for="nombre">Rut responsable</label>
+                  <input type="text" class="form-control" id="rut_responsable" name="rut_responsable" placeholder="Ingresa el rut del responsable" >
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Numero Documento</label>
-                  <input type="text" class="form-control text-uppercase" id="numero_documento" name="numero_documento" placeholder="Ingresa el numero de documento"  maxlength="28">
+                  <label for="nombre">dv</label>
+                  <input type="text" class="form-control" id="dv_responsable" name="dv_responsable" placeholder="Ingresa el dv del responsable" >
                 </div>
-                <div class="form-group">
-                  <label for="nombre">Nombre Empresa</label>
-                  <select class="form-control" name="id_empresa">
-                  <option selected disabled>Seleccionar</option>
-                  @foreach ($empresas as $empresa)
-                  <option value="{{ $empresa->id}}">{{ $empresa->nombre_empresa }}</option>
-                  @endforeach
-                  </select>
-                </div>
+                <script>
+                var dv1 = document.getElementById('dv_responsable');
                 
+                dv1.addEventListener("blur",onRutBlur , false);
+                 function onRutBlur() {
+                  var rut = document.getElementById('rut_responsable');
+                var dv = document.getElementById('dv_responsable');
+                var obj = rut.value + '-' + dv.value;
+                                
+                          if (VerificaRut(obj)){
+                          alert("Rut correcto");  
+                         
+                          }
+                          else 
+                          {
+                            rut.value="";
+                            dv.value="";
+                            rut.focus();
+                            alert("Rut incorrecto");
+                          }
+                            
+                        }
+                    </script>  
+         
                 <div class="form-group">
-                  <label for="nombre">Fecha Emision</label>
-                  <input type="date" class="form-control text-uppercase" id="fecha_emision" name="fecha_emision" >
+                  <label for="nombre">Nombre Apellido</label>
+                  <input type="text" class="form-control text-uppercase" id="nombre_apellido" name="nombre_apellido" placeholder="Ingresa el nombre y apellido del responsable"  maxlength="28">
                 </div>
                 <div class="form-group">
-                  <label for="nombre">Fecha Vencimiento</label>
-                  <input type="date" class="form-control text-uppercase" id="fecha_vencimiento" name="fecha_vencimiento" placeholder="Ingresa la fecha vencimiento"  maxlength="28">
+                  <label for="descripcion">Cargo</label>
+                  <input type="text" class="form-control" id="cargo"  name="cargo" placeholder="Ingresa el cargo">
                 </div>
-                 
-                <button type="submit" class="btn btn-primary">Crear</button>
+                <button type="submit" class="btn btn-primary" >Crear Responsable</button>
               </form>
         </div>
         <div class="col-1"></div>
     </div>
+
 @stop
 
 @section('css')
@@ -66,7 +77,6 @@
 @stop
 
 @section('js')
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     function VerificaRut(rut) {
@@ -110,6 +120,7 @@
     else {
         return false;
     }
-}   
-</script> 
+}
+</script>
+    
 @stop

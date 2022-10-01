@@ -21,7 +21,9 @@ class Detalle_entrada extends Model
         'serie',
         'lote',
         'fecha_vencimiento',
-        ];
+        'status_mp',
+        'stock_mp'
+     ];
         // relacion 1 a muchos, una materia prima puede estar en varios detalle entrada, y se colocoa en
 //  el parentesis nombre de la columna que hace referencia
 
@@ -36,4 +38,5 @@ public function encabezado_entrada()
 {
     return $this->belongsTo(Encabezado_entrada::class, 'id_encabezado_entrada');
 }
+
 }

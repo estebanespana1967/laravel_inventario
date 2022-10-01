@@ -53,9 +53,14 @@
 <td>{{ $entrada->numero_documento }}</td>
 
 <td>{{ $entrada->empresa->nombre_empresa }}</td>
+<?php
+     $fecha_emi = date("d-m-Y", strtotime($entrada->fecha_emision));
+     $fecha_venci = date("d-m-Y", strtotime($entrada->fecha_vencimiento));
 
-<td>{{ $entrada->fecha_emision }}</td>
-<td>{{ $entrada->fecha_vencimiento }}</td>
+?>
+    <td>{{ $fecha_emi }}</td>
+    <td>{{ $fecha_venci }}</td>
+<td>
 <td>
 </td>
 
@@ -92,8 +97,12 @@
     <td>{{ $detalle->costo}}</td> 
     <td>{{ $detalle->serie }}</td>
     <td>{{ $detalle->lote }}</td>
-    <td>{{ $detalle->fecha_vencimiento}}</td>
-    
+    <?php
+     $fecha_venci_m = date("d-m-Y", strtotime($detalle->fecha_vencimiento));
+
+?>
+    <td>{{ $fecha_venci_m }}</td>
+
     <?php
     $resultado= ($resultado+($detalle->cantidad_materia_prima*$detalle->costo));
     ?>

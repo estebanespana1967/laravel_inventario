@@ -19,10 +19,15 @@ return new class extends Migration
             $table->unsignedBigInteger('id_materia_prima');
             $table->string('cantidad_materia_prima');
             $table->string('unidad_medida');
-            $table->double('costo', 8, 2);
+            $table->double('costo', 10, 4);
             $table->string('serie');
             $table->string('lote');
             $table->date('fecha_vencimiento');
+            $table->string('status_mp')->default('SELLADO');
+            $table->double('stock_mp', 10, 4);
+            
+            $table->unsignedBigInteger('id_responsable');
+            
             $table->timestamps();
             $table->foreign('id_encabezado_entrada')
             ->references('id')
@@ -32,7 +37,10 @@ return new class extends Migration
             ->references('id')
             ->on('materia_prima')
             ->onDelete('cascade');
-            
+            $table->foreign('id_responsable')
+            ->references('id')
+            ->on('responsable')
+            ->onDelete('cascade');
         });
     }
 

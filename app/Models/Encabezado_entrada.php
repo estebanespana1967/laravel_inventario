@@ -17,6 +17,8 @@ class Encabezado_entrada extends Model
         'id_empresa',
         'fecha_emision',
         'fecha_vencimiento',
+        'id_responsable',
+        
     ]; 
     // relacion 1 a muchos, una empresa puede estar en 1 o varios encabezados, y se colocoa en
 //  el parentesis nombre de la columna que hace referencia
@@ -32,6 +34,11 @@ public function empresa()
 public function detalle_entrada()
 {
     return $this->hasMany(Detalle_entrada::class);
+}
+
+public function responsable()
+{
+    return $this->belongsTo(Responsable::class, 'id_responsable');
 }
 
                 

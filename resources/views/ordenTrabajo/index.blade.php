@@ -63,11 +63,12 @@
    
                     @method('PUT')
                     <a class="btn btn-warning" href="{{ route('ver_index',$cotizacion->id) }}">Ver</a>
+                    <a class="btn btn-primary" href="{{ route('ver_index_status',$cotizacion->id) }}">Ver Status</a>
                     @if ($cotizacion->estado == "TERMINADO")
                     
                     <a class="btn btn-success" href="{{ route('reportesMp.solicitarposicion',$cotizacion->id) }}">Imprimir</a>
                     @else
-                <button type="submit" class="btn btn-primary">Terminado</button>
+                <button type="submit" class="btn btn-danger">Terminado</button>
                     
                 @endif 
          

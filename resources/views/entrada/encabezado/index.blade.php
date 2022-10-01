@@ -68,9 +68,13 @@
 <td>{{ $entrada->numero_documento }}</td>
 
 <td>{{ $entrada->empresa->nombre_empresa }}</td>
+<?php
+     $fecha_emi = date("d-m-Y", strtotime($entrada->fecha_emision));
+     $fecha_venci = date("d-m-Y", strtotime($entrada->fecha_vencimiento));
 
-<td>{{ $entrada->fecha_emision }}</td>
-<td>{{ $entrada->fecha_vencimiento }}</td>
+?>
+    <td>{{ $fecha_emi }}</td>
+    <td>{{ $fecha_venci }}</td>
 <td>
 
 <form action="{{ route('entrada.encabezado.destroy',$entrada->id) }}" method="Post" onsubmit="return confirm('¿Desea eliminar este registro?');">

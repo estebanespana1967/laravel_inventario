@@ -16,7 +16,8 @@ use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\DetalleEntradaController;
 use App\Http\Controllers\SalidaController;
 use App\Http\Controllers\DetalleSalidaController;
-
+use App\Http\Controllers\ResponsableController;
+use App\Http\Controllers\HistorialPrecioController;
 
 
 use App\Http\Livewire\Productos;
@@ -77,6 +78,7 @@ Route::get('/cotizacioncapsula/indexcotizacioncapsula/{id}',[CotizacionControlle
 
 Route::get('/cotizacioncapsula/elegircotizacion/{id}',[CotizacionController::class,'elegircotizacion'])->name('elegircotizacion');
 Route::get('/cotizacioncapsula/ver_index/{id}',[CotizacionController::class,'ver_index'])->name('ver_index');
+Route::get('/cotizacionmateriaprima/ver_index_status/{id}',[CotizacionController::class,'ver_index_status'])->name('ver_index_status');
 
 
 Route::get('/cotizacioncapsula/crearcotizacioncapsula/{cotizacion_id}',[CotizacionController::class,'crearMateriaPrima'])->name('cotizacioncapsula.crearMateriaPrima');
@@ -93,11 +95,8 @@ Route::put('/cotizacioncapsula/actualizarcotizacionsemisolido/{cotizacion_id}/',
 
 Route::get('/receta',[RecetaController::class,'index'])->name('receta.index');
 Route::get('/receta/crear/{paciente_id}',[RecetaController::class,'create'])->name('receta.create');
-
 Route::get('/receta/createBlanca/{paciente_id}',[RecetaController::class,'createBlanca'])->name('receta.createBlanca');
-
 Route::get('/receta/crearcot/{paciente_id}/{cotizacion_id}',[RecetaController::class,'createcot'])->name('receta.createcot');
-
 Route::get('/receta/createBlancacot/{paciente_id}/{cotizacion_id}',[RecetaController::class,'createBlancacot'])->name('receta.createBlancacot');
 
 
@@ -181,6 +180,7 @@ Route::post('/entradadetalle/guardar',[DetalleEntradaController::class,'store'])
 Route::get('/entradadetalle/editar/{id}',[DetalleEntradaController::class,'edit'])->name('entrada.detalle.edit');
 Route::put('/entradadetalle/actualizar/{id}', [DetalleEntradaController::class, 'update'])->name('entrada.detalle.update');
 Route::delete('/entradadetalle/eliminar/{id}', [DetalleEntradaController::class, 'destroy'])->name('entrada.detalle.destroy');
+Route::get('/materia_prima_status',[DetalleEntradaController::class,'mp_status_index'])->name('entrada.detalle.mp_status_index');
 
 Route::get('/salidaencabezado',[SalidaController::class,'index'])->name('salida.encabezado.index');
 Route::get('/salidaencabezado/crear',[SalidaController::class,'create'])->name('salida.encabezado.create');
@@ -196,6 +196,24 @@ Route::get('/salidadetalle/editar/{id}',[DetalleSalidaController::class,'edit'])
 Route::put('/salidadetalle/actualizar/{id}', [DetalleSalidaController::class, 'update'])->name('salida.detalle.update');
 Route::delete('/salidadetalle/eliminar/{id}', [DetalleSalidaController::class, 'destroy'])->name('salida.detalle.destroy');
 
+
+Route::get('/responsable',[ResponsableController::class,'index'])->name('responsable.index');
+Route::get('/responsable/crear',[ResponsableController::class,'create'])->name('responsable.create');
+Route::post('/responsable/guardar',[ResponsableController::class,'store'])->name('responsable.store');
+Route::get('/responsable/editar/{id}',[ResponsableController::class,'edit'])->name('responsable.edit');
+Route::put('/responsable/actualizar/{id}', [ResponsableController::class, 'update'])->name('responsable.update');
+Route::delete('/responsable/eliminar/{id}', [ResponsableController::class, 'destroy'])->name('responsable.destroy');
+
+Route::get('/historial_precio',[HistorialPrecioController::class,'index'])->name('historial_precio.index');
+Route::get('/historial_precio/crear',[HistorialPrecioController::class,'create'])->name('historial_precio.create');
+Route::post('/historial_precio/guardar',[HistorialPrecioController::class,'store'])->name('historial_precio.store');
+Route::get('/historial_precio/editar/{id}',[HistorialPrecioController::class,'edit'])->name('historial_precio.edit');
+Route::put('/historial_precio/actualizar/{id}', [HistorialPrecioController::class, 'update'])->name('historial_precio.update');
+Route::delete('/historial_precio/eliminar/{id}', [HistorialPrecioController::class, 'destroy'])->name('historial_precio.destroy');
+
+
+Route::get('/receta_fecha',[ReporteController::class, 'reportes_receta'])->name('receta_fecha.index');
+Route::get('/receta_fecha/index2',[ReporteController::class, 'corregir_receta'])->name('receta_fecha.index2');
 
 
 Route::get('/test/', function () {

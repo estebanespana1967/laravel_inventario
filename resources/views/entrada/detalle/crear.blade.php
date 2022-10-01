@@ -48,10 +48,17 @@
                   <label for="cantidad_materia_prima">Cantidad materia prima</label>
                   <input type="text" class="form-control" id="cantidad_materia_prima" name="cantidad_materia_prima" placeholder="cantidad materia prima">
                 </div>
+                
+                <select class="form-control" name="unidad_medida">
+                <option value="GRS" selected>GRS</option>
+                <option value="LITRO">LITRO</option>
+                </select>
+              <!-------------
                 <div class="form-group">
                   <label for="unidad_medida">Unidad de medida</label>
                   <input type="text" class="form-control" id="unidad_medida" name="unidad_medida" placeholder="unidad_medida">
                 </div>
+                ---------->
                 <div class="form-group">
                 <div class="row">
                   <div class="col-sm">
