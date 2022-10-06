@@ -38,5 +38,9 @@ public function encabezado_entrada()
 {
     return $this->belongsTo(Encabezado_entrada::class, 'id_encabezado_entrada');
 }
+public function cotizacion()
+{
+    return $this->hasMany(Cotizacion::class);
+}
 
 }

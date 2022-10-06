@@ -78,7 +78,7 @@ Route::get('/cotizacioncapsula/indexcotizacioncapsula/{id}',[CotizacionControlle
 
 Route::get('/cotizacioncapsula/elegircotizacion/{id}',[CotizacionController::class,'elegircotizacion'])->name('elegircotizacion');
 Route::get('/cotizacioncapsula/ver_index/{id}',[CotizacionController::class,'ver_index'])->name('ver_index');
-Route::get('/cotizacionmateriaprima/ver_index_status/{id}',[CotizacionController::class,'ver_index_status'])->name('ver_index_status');
+Route::get('/cotizacionmateriaprima/ver_index_status/{id}',[OrdenTrabajoController::class,'ver_index_status'])->name('ver_index_status');
 
 
 Route::get('/cotizacioncapsula/crearcotizacioncapsula/{cotizacion_id}',[CotizacionController::class,'crearMateriaPrima'])->name('cotizacioncapsula.crearMateriaPrima');
@@ -138,6 +138,7 @@ Route::post('/posicion/{cotizacion_id}',  [ReporteController::class, 'solicitare
 Route::get('/orden_trabajo',[OrdenTrabajoController::class,'index'])->name('orden_trabajo.index');
 Route::get('/orden_trabajo/guardarOC',[OrdenTrabajoController::class,'guardarOC'])->name('ordenTrabajo.guardarOC');
 Route::put('/orden_trabajo/actualizar/{id}', [OrdenTrabajoController::class, 'updateEstado'])->name('orden_trabajo.updateEstado');
+Route::put('/lote_serie/actualizar/{id}', [OrdenTrabajoController::class, 'updateLoteSerie'])->name('orden_trabajo.updateLoteSerie');
 
 Route::get('/orden_entrega',[OrdenEntregaController::class,'index'])->name('orden_entrega.index');
 Route::put('/orden_entrega/actualizar/{id}', [OrdenEntregaController::class, 'updateEstado'])->name('orden_entrega.updateEstado');
@@ -181,6 +182,8 @@ Route::get('/entradadetalle/editar/{id}',[DetalleEntradaController::class,'edit'
 Route::put('/entradadetalle/actualizar/{id}', [DetalleEntradaController::class, 'update'])->name('entrada.detalle.update');
 Route::delete('/entradadetalle/eliminar/{id}', [DetalleEntradaController::class, 'destroy'])->name('entrada.detalle.destroy');
 Route::get('/materia_prima_status',[DetalleEntradaController::class,'mp_status_index'])->name('entrada.detalle.mp_status_index');
+Route::get('/materia_prima_status/status_en_uso',[DetalleEntradaController::class,'UpdateStatusEnUso'])->name('entrada.detalle.status_en_uso');
+
 
 Route::get('/salidaencabezado',[SalidaController::class,'index'])->name('salida.encabezado.index');
 Route::get('/salidaencabezado/crear',[SalidaController::class,'create'])->name('salida.encabezado.create');

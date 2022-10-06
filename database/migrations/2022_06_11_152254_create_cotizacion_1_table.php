@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('materia_prima_id');
             $table->float('cantidad_materia_prima');
             $table->float('costo_materia_prima');
+            $table->unsignedBigInteger('id_detalle_entrada');
             $table->timestamps();
             $table->foreign('cotizacion_detalle_id')
             ->references('id')
@@ -28,6 +29,11 @@ return new class extends Migration
             ->references('id')
             ->on('materia_prima')
             ->onDelete('cascade');
+            $table->foreign('id_detalle_entrada')
+            ->references('id')
+            ->on('detalle_entrada')
+            ->onDelete('cascade');
+
         });
     }
 

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\CotizacionDetalle;
 use App\Models\Paciente;
 use App\Models\Persona;
+use App\Models\Receta;
+use App\Models\Cotizacion;
+use App\Models\Detalle_entrada;
+
+
 use Illuminate\Http\Request;
 
 class OrdenTrabajoController extends Controller
@@ -140,4 +145,57 @@ class OrdenTrabajoController extends Controller
     {
         //
     }
+    public function ver_index_status($id)
+    {
+        $cotizacion_detalle=CotizacionDetalle::find($id);
+        $cotizacion_existe=Receta::where('numero_interno',$id)->select('id')->get(); 
+        $paciente=Paciente::find($cotizacion_detalle->paciente_id);
+        $cotizaciones=Cotizacion::where('cotizacion_detalle_id',$id)->orderBy('materia_prima_id')->get();
+        $cotizaciones_mp=Cotizacion::where('cotizacion_detalle_id',$id)->select('materia_prima_id')->get();
+        $detalle_entrada=Detalle_entrada::whereIn('id_materia_prima',$cotizaciones_mp)
+        ->where('status_mp',"EN USO")
+        ->select('id_materia_prima','serie','lote','fecha_vencimiento','id')->orderBy('id_materia_prima')->get();
+
+        if ($cotizacion_detalle->tipo_cotizacion ==1){
+        return view('cotizacioncapsula.detalle_capsula.ver_index_status', compact('detalle_entrada','paciente','cotizaciones','cotizacion_detalle'));
+        } else {
+        return view('cotizacioncapsula.detalle_semisolido.ver_index_status', compact('detalle_entrada','paciente','cotizaciones','cotizacion_detalle'));
+        }
+    }
+    public function updateLoteSerie(Request $request,  $id)
+    {
+        $cotizaciones_mp=Cotizacion::where('cotizacion_detalle_id',$id)->select('materia_prima_id')->get();
+        $detalle_entrada=Detalle_entrada::whereIn('id_materia_prima',$cotizaciones_mp)
+        ->where('status_mp',"EN USO")
+        ->select('id_materia_prima','serie','lote','fecha_vencimiento','id')->orderBy('id_materia_prima')->get();
+ 
+        foreach ($detalle_entrada as $detalle ) {
+            
+            $cotizacion=Cotizacion::where('materia_prima_id',$detalle->id_materia_prima)
+            ->where('cotizacion_detalle_id',$id)
+            ->get();
+        
+            $cotizacion[0]->id_detalle_entrada=$request->detalle_."".$detalle->id;
+            // OJO !!!!   $request->detalle_."".$detalle->id_materia_prima ??
+
+            $cotizacion[0]->save();
+        }
+        $nombre = "";
+        
+        /* $posicion_coincidencia = strpos($cadena_de_texto, $cadena_buscada);
+ 
+            $nombre = $request->nombre;
+            $cotizacion = CotizacionDetalle::find($id);            
+            $cotizacion->estado = "TERMINADO";
+            $cotizacion->save();//Guarda la informaci'on en la tabla producto de la base de datos
+         */    $cotizaciones=CotizacionDetalle::whereIn('estado', ['TERMINADO', 'PRODUCCION'])
+            ->orderBy('id', 'desc')
+            ->paginate(5);
+    return view('ordenTrabajo.index', compact('cotizaciones','nombre')); 
+                
+    }
+
+
+
+
 }

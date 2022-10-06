@@ -70,7 +70,7 @@
                     @csrf
                     @method('PUT')
                     @if ($mp_entrada->status_mp == "SELLADO")
-                    <a class="btn btn-success" href="">PONER EN USO</a>
+                    <a class="btn btn-success" href="{{ route('entrada.detalle.status_en_uso',$mp_entrada->id) }}">PONER EN USO</a>
                     @elseif ($mp_entrada->status_mp == "EN USO")
                 <button type="submit" class="btn btn-primary">TERMINADO</button>
                 @endif 

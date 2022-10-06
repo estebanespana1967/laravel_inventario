@@ -250,12 +250,15 @@ class DetalleEntradaController extends Controller
         ->orderBy('fecha_vencimiento', 'asc')
         ->paginate(5);
       
-    
+        
+        date("d-m-Y",strtotime($fecha_actual."- 1 days")); 
+
     } elseif ($request->termino_busqueda==2){
         $currentDateTime = Carbon::parse($nombre);
         $fecha_final = ($currentDateTime->addDays(90))->format('Y-m-d');
         $fecha_inicial = ($currentDateTime->subDays(90))->format('Y-m-d');
-        dd($fecha_inicial);
+        // $fecha_inicial2 = date("d-m-Y",strtotime($currentDateTime."- 90 days"));
+        // dd($fecha_inicial2);
 
         $mp_entradas=Detalle_entrada::whereBetween('fecha_vencimiento', array($fecha_inicial, $fecha_final))
         ->orderBy('fecha_vencimiento', 'asc')
@@ -270,4 +273,16 @@ class DetalleEntradaController extends Controller
     }
     return view('materia_prima_status.index', compact('mp_entradas','nombre'));
     }
+
+
+    public function UpdateStatusEnUso(Request $request, $id)
+    {
+           
+        $nombre = "";
+            $detalle_entrada=Detalle_entrada::find($id);
+    	    $detalle_entrada->status_mp='EN USO';                        
+            $detalle_entrada->save();
+            return view('materia_prima_status.index', compact('detalle_entrada','nombre')); 
+    }
+
 }

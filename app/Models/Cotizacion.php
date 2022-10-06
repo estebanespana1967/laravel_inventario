@@ -17,6 +17,7 @@ class Cotizacion extends Model
         'materia_prima_id',
         'cantidad_materia_prima',
         'costo_materia_prima',
+        'id_detalle_entrada',
     ];    
     // relacion  de 1 a 1
     public function materia_prima_cotizacion() {
@@ -25,6 +26,10 @@ class Cotizacion extends Model
     }
     public function cotizacion_detalle() {
         return $this->belongsTo(CotizacionDetalle::class,'cotizacion_detalle_id');
-
     }
+    public function detalle_entrada() {
+        return $this->belongsTo(Detalle_entrada::class,'id_detalle_entrada');
+    }
+
+
 }

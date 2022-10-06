@@ -72,11 +72,9 @@ $newDate = date("d-m-Y", strtotime($cotizacion_detalle->fecha_cotizacion));
 
 <select name="detalle_{{$cotizacion->id}}" id="">
 @foreach($detalle_entrada as $detalle)
-@if($detalle->id_materia_prima == $cotizacion->id)
+
 <option value="{{$detalle->id}}">Vencto:{{$detalle->fecha_vencimiento}} Lote: {{$detalle->lote}} Serie:{{$detalle->serie}} </option>
 
-@else
-@endif
 @endforeach
 </select>
 
@@ -93,7 +91,7 @@ $newDate = date("d-m-Y", strtotime($cotizacion_detalle->fecha_cotizacion));
 </td>
 
 </tr>
-    </form>    
+</form>    
 
 </table>
 
